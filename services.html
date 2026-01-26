@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <title>Our Services - Introvminds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: none;
+            position: relative;
+        }
+
+        /* Background Animations */
+        .bg-animations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 60s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        body.dark-mode .bg-grid {
+            background-image: 
+                linear-gradient(rgba(255, 107, 53, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px);
+        }
+
+        .blob-wrapper {
+            position: absolute;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob {
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 107, 53, 0.05);
+            filter: blur(80px);
+            border-radius: 50%;
+            transition: transform 0.2s ease-out;
+        }
+
+        .blob-1 {
+            top: -100px;
+            left: -100px;
+            animation-duration: 25s;
+        }
+
+        .blob-1 .blob {
+            background: rgba(255, 107, 53, 0.08);
+        }
+
+        .blob-2 {
+            bottom: -150px;
+            right: -100px;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+
+        .blob-2 .blob {
+            background: rgba(255, 140, 66, 0.06);
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 30%;
+            animation-duration: 22s;
+            animation-delay: -10s;
+        }
+
+        .blob-3 .blob {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 107, 53, 0.04);
+        }
+
+        @keyframes move {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, 30px) scale(1.05); }
+            66% { transform: translate(-30px, 50px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        body.dark-mode .blob {
+            background: rgba(255, 107, 53, 0.03);
+        }
+
+        body.dark-mode .blob-1 .blob { background: rgba(255, 107, 53, 0.05); }
+        body.dark-mode .blob-2 .blob { background: rgba(255, 140, 66, 0.04); }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff6b35;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: #ff6b35;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transition: width 0.15s ease, height 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .custom-cursor.hover {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 107, 53, 0.1);
+            border-color: #ff6b35;
+        }
+
+        .cursor-dot.hover {
+            width: 8px;
+            height: 8px;
+        }
+
+        .custom-cursor.click {
+            width: 15px;
+            height: 15px;
+        }
+
+        body.dark-mode {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        body.dark-mode .custom-cursor {
+            border-color: #ff8c42;
+        }
+
+        body.dark-mode .cursor-dot {
+            background: #ff8c42;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .nav-brand .logo {
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-brand .logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            background-color: transparent !important;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 100px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 107, 53, 0.08);
+            color: var(--primary);
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            min-width: 280px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 0.8rem;
+            z-index: 1001;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            visibility: hidden;
+        }
+
+        /* Bridge to prevent closing when moving cursor */
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: transparent;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-content a {
+            color: var(--text-main);
+            padding: 1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 107, 53, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .dropdown-content a svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-muted);
+            transition: stroke 0.3s ease;
+        }
+
+        .dropdown-content a:hover svg {
+            stroke: var(--primary);
+        }
+
+        .dropdown-content a:hover {
+            color: var(--primary);
+        }
+
+        body.dark-mode .dropdown-content {
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .dropdown-content a:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: scale(1.1);
+        }
+
+        .cta-btn {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode nav .nav-brand,
+        body.dark-mode nav .nav-menu,
+        body.dark-mode nav .nav-cta {
+            background: rgba(26, 26, 26, 0.95);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .nav-links a {
+            color: #ffffff;
+        }
+
+        body.dark-mode .nav-links a:hover {
+            color: #ff6b35;
+            background: rgba(255, 107, 53, 0.2);
+        }
+
+        /* Services Header */
+        .services-header {
+            padding: 12rem 5% 6rem;
+            text-align: center;
+            background: linear-gradient(135deg, #fff9f5 0%, #ffffff 50%, #fff5ed 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .services-header {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+        }
+
+        .services-header h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark-mode .services-header h1 {
+            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-header p {
+            font-size: 1.2rem;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .services-header p {
+            color: #b0b0b0;
+        }
+
+        /* Detailed Services Section */
+        .services-detail {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-detail-card {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 8rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .service-detail-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .service-detail-card:nth-child(even) .service-text {
+            direction: ltr;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 107, 53, 0.05);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            border: 2px solid rgba(255, 107, 53, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .service-text h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        body.dark-mode .service-text h2 {
+            color: #ffffff;
+        }
+
+        .service-text p {
+            font-size: 1.15rem;
+            color: #666666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        body.dark-mode .service-text p {
+            color: #b0b0b0;
+        }
+
+        .service-features {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        body.dark-mode .service-features li {
+            color: #ffffff;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: #ff6b35;
+            font-weight: 900;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+
+        .footer-section .logo {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #999999;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #2d2d2d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #2d2d2d;
+            color: #999999;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25d366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+            z-index: 1100;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 18px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .service-detail-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 6rem;
+            }
+
+            .service-detail-card:nth-child(even) {
+                direction: ltr;
+            }
+
+            .service-image {
+                height: 300px;
+                font-size: 6rem;
+            }
+
+            .service-text h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                top: 1rem;
+                left: 1rem;
+                right: 1rem;
+                width: auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .services-header {
+                padding: 10rem 5% 4rem;
+            }
+
+            .service-features {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                right: 1.5rem;
+                bottom: 1.5rem;
+                width: 56px;
+                height: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animations -->
+    <div class="bg-animations">
+        <div class="bg-grid"></div>
+        <div class="blob-wrapper blob-1"><div class="blob"></div></div>
+        <div class="blob-wrapper blob-2"><div class="blob"></div></div>
+        <div class="blob-wrapper blob-3"><div class="blob"></div></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="introvminds_landing.html" class="logo">
+                <img src="logo.png" alt="Introvminds Logo">
+            </a>
+        </div>
+        <div class="nav-menu">
+            <ul class="nav-links">
+                <li><a href="introvminds_landing.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <div class="dropdown-content">
+                        <a href="seo-content.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            SEO & Content Marketing
+                        </a>
+                        <a href="social-media.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                            Social Media Management
+                        </a>
+                        <a href="ppc-ads.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            PPC & Paid Ads
+                        </a>
+                        <a href="email-marketing.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            Email Marketing
+                        </a>
+                        <a href="web-design.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            Web Design & Dev
+                        </a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+            <a href="contact.html" class="cta-btn desktop-only">Get Started</a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="services-header">
+        <h1>Detailed Services</h1>
+        <p>Explore our comprehensive suite of digital marketing solutions designed to scale your business and dominate your industry.</p>
+    </header>
+
+    <!-- Services Detail Section -->
+    <section class="services-detail">
+        <div class="service-detail-card">
+            <div class="service-image">🎯</div>
+            <div class="service-text">
+                <h2>SEO & Content</h2>
+                <p>Dominate search rankings with strategic SEO and compelling content that converts visitors into loyal customers. We focus on both technical optimization and high-value content creation.</p>
+                <ul class="service-features">
+                    <li>Keyword Research</li>
+                    <li>On-Page SEO</li>
+                    <li>Link Building</li>
+                    <li>Content Strategy</li>
+                </ul>
+                <a href="seo-content.html" class="learn-more-btn">Explore SEO Services</a>
+            </div>
+        </div>
+
+        <div class="service-detail-card">
+            <div class="service-image">📱</div>
+            <div class="service-text">
+                <h2>Social Media Marketing</h2>
+                <p>Build engaged communities and amplify your brand voice across all major social platforms with data-driven campaigns. We create scroll-stopping content that drives real engagement.</p>
+                <ul class="service-features">
+                    <li>Community Management</li>
+                    <li>Paid Social Ads</li>
+                    <li>Influencer Marketing</li>
+                    <li>Content Creation</li>
+                </ul>
+                <a href="social-media.html" class="learn-more-btn">Explore Social Services</a>
+            </div>
+        </div>
+
+        <div class="service-detail-card">
+            <div class="service-image">💰</div>
+            <div class="service-text">
+                <h2>PPC Advertising</h2>
+                <p>Maximize ROI with precision-targeted paid campaigns that deliver qualified leads and measurable results. We manage your budget effectively to ensure every click counts.</p>
+                <ul class="service-features">
+                    <li>Google Ads</li>
+                    <li>Remarketing</li>
+                    <li>Display Ads</li>
+                    <li>A/B Testing</li>
+                </ul>
+                <a href="ppc-ads.html" class="learn-more-btn">Explore PPC Services</a>
+            </div>
+        </div>
+
+        <div class="service-detail-card">
+            <div class="service-image">📧</div>
+            <div class="service-text">
+                <h2>Email Marketing</h2>
+                <p>Nurture relationships and drive conversions with personalized email campaigns that resonate with your audience. We build automation sequences that work while you sleep.</p>
+                <ul class="service-features">
+                    <li>Automation</li>
+                    <li>Newsletter Design</li>
+                    <li>Segmentation</li>
+                    <li>Lead Nurturing</li>
+                </ul>
+                <a href="email-marketing.html" class="learn-more-btn">Explore Email Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="logo">Introvminds</h3>
+                <p>Transforming brands through innovative digital marketing strategies.</p>
+                <div class="social-links">
+                    <a href="#">𝕏</a>
+                    <a href="#">in</a>
+                    <a href="#">f</a>
+                    <a href="#">ig</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="seo-content.html">SEO & Content</a>
+                <a href="social-media.html">Social Media</a>
+                <a href="ppc-ads.html">PPC Advertising</a>
+                <a href="email-marketing.html">Email Marketing</a>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="services.html">All Services</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>hello@introvminds.com</p>
+                <p>+91 98765 43210</p>
+                <p>Mumbai, Maharashtra</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Introvminds. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a
+        href="https://wa.me/919876543210?text=Hi%20Introvminds%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services."
+        class="whatsapp-float"
+        aria-label="Chat with Introvminds on WhatsApp"
+        target="_blank"
+        rel="noopener"
+    >💬</a>
+
+    <script>
+        // Custom Cursor - No Delay
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        const blobs = document.querySelectorAll('.blob');
+
+        document.addEventListener('mousemove', (e) => {
+            // Direct positioning - no lag
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+
+            // Background Parallax
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 20;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                blob.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Hover effect on interactive elements
+        const hoverElements = document.querySelectorAll('a, button, .service-detail-card');
+        
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorDot.classList.add('hover');
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorDot.classList.remove('hover');
+            });
+        });
+
+        // Click effect
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('click');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('click');
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Scroll animation for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-detail-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
