@@ -1973,6 +1973,7 @@
             .hero {
                 padding: 8rem 5% 4rem;
                 min-height: auto;
+                overflow-x: hidden;
             }
 
             .hero-content {
@@ -1985,11 +1986,32 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+            }
+
+            .hero-tag {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+                margin-bottom: 1.5rem;
+                text-align: center;
             }
 
             .hero h1 {
-                font-size: clamp(2.5rem, 8vw, 3.5rem);
+                font-size: clamp(2rem, 8vw, 3rem);
                 margin-bottom: 1.25rem;
+                word-break: break-word;
+            }
+
+            .hero-search-bar {
+                padding: 1rem 1.25rem;
+                gap: 0.75rem;
+            }
+
+            .search-placeholder {
+                font-size: 0.85rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .hero p {
@@ -2019,8 +2041,15 @@
             }
 
             .hero-right {
-                height: 350px;
+                height: 320px;
                 margin-top: 2rem;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .industries-showcase {
+                height: 280px;
             }
 
             .logos-grid {
@@ -2034,19 +2063,19 @@
             }
 
             .industry-card {
-                width: 280px;
-                padding: 1.5rem;
+                width: 260px;
+                padding: 1.25rem;
                 transform: translate(-50%, -50%) scale(0.9);
             }
 
             .industry-card.prev {
-                transform: translate(-105%, -50%) scale(0.7);
-                opacity: 0.2;
+                transform: translate(-95%, -50%) scale(0.7);
+                opacity: 0.1;
             }
 
             .industry-card.next {
-                transform: translate(5%, -50%) scale(0.7);
-                opacity: 0.2;
+                transform: translate(-5%, -50%) scale(0.7);
+                opacity: 0.1;
             }
 
             .industry-card.active {
