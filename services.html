@@ -3,1488 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Introvminds</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-    <title>Our Services - Introvminds</title>
-    <style>
-        :root {
-            --primary: #ff6b35;
-            --primary-dark: #e85a24;
-            --secondary: #1a1a1a;
-            --text-main: #1a1a1a;
-            --text-muted: #4a4a4a;
-            --bg-light: #ffffff;
-            --bg-subtle: #fafafa;
-            --glass-bg: rgba(255, 255, 255, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body.dark-mode {
-            --bg-light: #0a0a0a;
-            --bg-subtle: #121212;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --glass-bg: rgba(10, 10, 10, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --shadow-md: 0 10px 40px rgba(0,0,0,0.4);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #ffffff;
-            color: #1a1a1a;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: none;
-            position: relative;
-        }
-
-        /* Background Animations */
-        .bg-animations {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .bg-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            background-image: 
-                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 60s linear infinite;
-            opacity: 0.5;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-50px, -50px); }
-        }
-
-        body.dark-mode .bg-grid {
-            background-image: 
-                linear-gradient(rgba(255, 107, 53, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 107, 53, 0.02) 1px, transparent 1px);
-        }
-
-        .blob-wrapper {
-            position: absolute;
-            animation: move 20s infinite alternate;
-        }
-
-        .blob {
-            width: 500px;
-            height: 500px;
-            background: rgba(255, 107, 53, 0.05);
-            filter: blur(80px);
-            border-radius: 50%;
-            transition: transform 0.2s ease-out;
-        }
-
-        .blob-1 {
-            top: -100px;
-            left: -100px;
-            animation-duration: 25s;
-        }
-
-        .blob-1 .blob {
-            background: rgba(255, 107, 53, 0.08);
-        }
-
-        .blob-2 {
-            bottom: -150px;
-            right: -100px;
-            animation-duration: 30s;
-            animation-delay: -5s;
-        }
-
-        .blob-2 .blob {
-            background: rgba(255, 140, 66, 0.06);
-        }
-
-        .blob-3 {
-            top: 40%;
-            left: 30%;
-            animation-duration: 22s;
-            animation-delay: -10s;
-        }
-
-        .blob-3 .blob {
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 107, 53, 0.04);
-        }
-
-        @keyframes move {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, 30px) scale(1.05); }
-            66% { transform: translate(-30px, 50px) scale(0.95); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-
-        body.dark-mode .blob {
-            background: rgba(255, 107, 53, 0.03);
-        }
-
-        body.dark-mode .blob-1 .blob { background: rgba(255, 107, 53, 0.05); }
-        body.dark-mode .blob-2 .blob { background: rgba(255, 140, 66, 0.04); }
-
-        /* Custom Cursor */
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ff6b35;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-        }
-
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background: #ff6b35;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10001;
-            transition: width 0.15s ease, height 0.15s ease;
-            transform: translate(-50%, -50%);
-        }
-
-        .custom-cursor.hover {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 107, 53, 0.1);
-            border-color: #ff6b35;
-        }
-
-        .cursor-dot.hover {
-            width: 8px;
-            height: 8px;
-        }
-
-        .custom-cursor.click {
-            width: 15px;
-            height: 15px;
-        }
-
-        body.dark-mode {
-            background: #0a0a0a;
-            color: #ffffff;
-        }
-
-        body.dark-mode .custom-cursor {
-            border-color: #ff8c42;
-        }
-
-        body.dark-mode .cursor-dot {
-            background: #ff8c42;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            position: fixed;
-            top: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 100px;
-            padding: 0.5rem 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .navbar:hover {
-            width: 92%;
-            background: var(--bg-light);
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-brand img {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .nav-brand .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: -1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            opacity: 0.8;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            opacity: 1;
-        }
-
-        /* Dropdown Styles */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: var(--bg-light);
-            min-width: 280px;
-            border-radius: 20px;
-            padding: 1rem;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--glass-border);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: grid;
-            gap: 0.5rem;
-            z-index: 1100;
-        }
-
-        .dropdown:hover .dropdown-content {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(20px);
-        }
-
-        .dropdown-content a {
-            padding: 0.8rem 1rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            transition: var(--transition);
-        }
-
-        .dropdown-content a svg {
-            width: 18px;
-            height: 18px;
-            color: var(--primary);
-        }
-
-        .dropdown-content a:hover {
-            background: var(--bg-subtle);
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(15deg);
-            color: var(--primary);
-        }
-
-        .cta-btn {
-            background: var(--primary);
-            color: white !important;
-            padding: 0.8rem 1.8rem;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .cta-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Trust Indicators Section */
-        .trust-indicators {
-            padding: 4rem 5% 2rem;
-            background: var(--bg-light);
-            position: relative;
-        }
-
-        .trust-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Trust Stats */
-        .trust-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        .stat-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: #666666;
-            font-weight: 600;
-        }
-
-        body.dark-mode .stat-label {
-            color: #b0b0b0;
-        }
-
-        /* Trust Badges */
-        .trust-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        body.dark-mode .trust-badges {
-            background: rgba(26, 26, 26, 0.5);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .badge-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.5rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .badge-item {
-            background: #1a1a1a;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .badge-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        body.dark-mode .badge-item:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .badge-icon {
-            font-size: 2rem;
-        }
-
-        .badge-text {
-            font-weight: 700;
-            color: #1a1a1a;
-        }
-
-        body.dark-mode .badge-text {
-            color: #ffffff;
-        }
-
-        /* Responsive Trust Indicators */
-        @media (max-width: 768px) {
-            .trust-stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .trust-badges {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .badge-item {
-                justify-content: center;
-            }
-        }
-
-        /* Services Header */
-        .services-header {
-            padding: 13rem 5% 8rem;
-            text-align: center;
-            background: linear-gradient(135deg, #fff9f5 0%, #ffffff 50%, #fff5ed 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-mode .services-header {
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
-        }
-
-        .services-header h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #1a1a1a 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        body.dark-mode .services-header h1 {
-            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .services-header .subtitle {
-            font-size: 1.4rem;
-            color: #ff6b35;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        body.dark-mode .services-header .subtitle {
-            color: #ff8c42;
-        }
-
-        .services-header p {
-            font-size: 1.25rem;
-            color: #666666;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            line-height: 1.7;
-        }
-
-        body.dark-mode .services-header p {
-            color: #b0b0b0;
-        }
-
-        .services-header .header-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .primary-btn {
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .primary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
-
-        .secondary-btn {
-            padding: 1rem 2.5rem;
-            background: transparent;
-            color: #1a1a1a;
-            text-decoration: none;
-            border: 2px solid #e0e0e0;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .secondary-btn {
-            color: #ffffff;
-            border-color: #333333;
-        }
-
-        .secondary-btn:hover {
-            border-color: #ff6b35;
-            color: #ff6b35;
-            background: rgba(255, 107, 53, 0.05);
-        }
-
-        /* Detailed Services Section */
-        .services-detail {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-detail-card {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 8rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 3rem;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .service-detail-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-        }
-
-        body.dark-mode .service-detail-card {
-            background: rgba(26, 26, 26, 0.5);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        body.dark-mode .service-detail-card:hover {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .service-detail-card:nth-child(even) {
-            direction: rtl;
-        }
-
-        .service-detail-card:nth-child(even) .service-text {
-            direction: ltr;
-        }
-
-        .service-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 140, 66, 0.05) 100%);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-            border: 2px solid rgba(255, 107, 53, 0.15);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .service-image {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 140, 66, 0.1) 100%);
-            border-color: rgba(255, 107, 53, 0.25);
-        }
-
-        .service-detail-card:hover .service-image {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-
-        .service-image::before {
-            content: '';
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .service-text h2 {
-            font-size: 2.75rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            color: #1a1a1a;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        body.dark-mode .service-text h2 {
-            color: #ffffff;
-        }
-
-        .service-text h2::before {
-            content: '';
-            width: 10px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            border-radius: 5px;
-        }
-
-        .service-text p {
-            font-size: 1.15rem;
-            color: #666666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        body.dark-mode .service-text p {
-            color: #b0b0b0;
-        }
-
-        .service-features {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .service-features li {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            background: rgba(255, 107, 53, 0.05);
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .service-features li {
-            color: #ffffff;
-            background: rgba(255, 107, 53, 0.1);
-        }
-
-        .service-features li:hover {
-            background: rgba(255, 107, 53, 0.15);
-            transform: translateX(5px);
-        }
-
-        body.dark-mode .service-features li:hover {
-            background: rgba(255, 107, 53, 0.2);
-        }
-
-        .service-features li::before {
-            content: '✓';
-            color: #ff6b35;
-            font-weight: 900;
-            font-size: 1.2rem;
-        }
-
-        /* Learn More Button */
-        .learn-more-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            color: white !important;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
-        }
-
-        .learn-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
-
-        .learn-more-btn svg {
-            transition: transform 0.3s ease;
-        }
-
-        .learn-more-btn:hover svg {
-            transform: translateX(5px);
-        }
-
-        /* Process Overview Section */
-        .process-overview {
-            padding: 8rem 5% 10rem;
-            background: var(--bg-light);
-            position: relative;
-        }
-
-        .process-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .process-header {
-            margin-bottom: 5rem;
-        }
-
-        .process-header .subtitle {
-            font-size: 1.4rem;
-            color: #ff6b35;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        body.dark-mode .process-header .subtitle {
-            color: #ff8c42;
-        }
-
-        .process-header h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #1a1a1a 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        body.dark-mode .process-header h2 {
-            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .process-header p {
-            font-size: 1.25rem;
-            color: #666666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        body.dark-mode .process-header p {
-            color: #b0b0b0;
-        }
-
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-top: 5rem;
-        }
-
-        .process-step {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 3rem 2rem;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        body.dark-mode .process-step {
-            background: rgba(26, 26, 26, 0.8);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .process-step:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        body.dark-mode .process-step:hover {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: white;
-            margin: 0 auto 2rem;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .process-step:hover .step-number {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
-        }
-
-        .process-step h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 1rem;
-        }
-
-        body.dark-mode .process-step h3 {
-            color: #ffffff;
-        }
-
-        .process-step p {
-            font-size: 1.05rem;
-            color: #666666;
-            line-height: 1.7;
-        }
-
-        body.dark-mode .process-step p {
-            color: #b0b0b0;
-        }
-
-        /* Responsive Process */
-        @media (max-width: 768px) {
-            .process-steps {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .process-step {
-                padding: 2.5rem 1.5rem;
-            }
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            padding: 8rem 5% 10rem;
-            background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f8f9fa 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-mode .testimonials {
-            background: linear-gradient(135deg, #121212 0%, #1a1a1a 50%, #121212 100%);
-        }
-
-        .testimonials-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .testimonials-header {
-            margin-bottom: 5rem;
-        }
-
-        .testimonials-header .subtitle {
-            font-size: 1.4rem;
-            color: #ff6b35;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        body.dark-mode .testimonials-header .subtitle {
-            color: #ff8c42;
-        }
-
-        .testimonials-header h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #1a1a1a 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        body.dark-mode .testimonials-header h2 {
-            background: linear-gradient(135deg, #ffffff 0%, #ff6b35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .testimonials-header p {
-            font-size: 1.25rem;
-            color: #666666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        body.dark-mode .testimonials-header p {
-            color: #b0b0b0;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 3rem 2rem;
-            text-align: left;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        body.dark-mode .testimonial-card {
-            background: rgba(26, 26, 26, 0.8);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        body.dark-mode .testimonial-card:hover {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .testimonial-rating {
-            color: #ffd700;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .testimonial-text {
-            font-size: 1.15rem;
-            color: #666666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        body.dark-mode .testimonial-text {
-            color: #b0b0b0;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .author-info h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
-        }
-
-        body.dark-mode .author-info h4 {
-            color: #ffffff;
-        }
-
-        .author-info p {
-            font-size: 0.95rem;
-            color: #888888;
-        }
-
-        body.dark-mode .author-info p {
-            color: #999999;
-        }
-
-        /* Responsive Testimonials */
-        @media (max-width: 768px) {
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .testimonial-card {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        /* Sticky CTA Button for Mobile */
-        .sticky-cta {
-            display: none;
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1500;
-        }
-
-        .sticky-cta-button {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1.25rem 2rem;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .sticky-cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .sticky-cta {
-                display: block;
-            }
-        }
-
-        /* Footer CTA Section */
-        .footer-cta {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 0;
-        }
-
-        .footer-cta::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: float 8s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(20px, -20px) rotate(180deg); }
-        }
-
-        .footer-cta-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-cta h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        .footer-cta p {
-            font-size: 1.25rem;
-            margin-bottom: 3rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .footer-cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .footer-cta .primary-btn {
-            background: white;
-            color: #ff6b35 !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .footer-cta .primary-btn:hover {
-            background: #f8f9fa;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .footer-cta .secondary-btn {
-            background: transparent;
-            color: white !important;
-            border: 2px solid white;
-        }
-
-        .footer-cta .secondary-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Responsive Footer CTA */
-        @media (max-width: 768px) {
-            .footer-cta {
-                padding: 4rem 5%;
-            }
-
-            .footer-cta-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        /* Footer */
-        footer {
-            padding: 4rem 5%;
-            background: #1a1a1a;
-            color: #ffffff;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            color: #ffffff;
-        }
-
-        .footer-section .logo {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-section p, .footer-section a {
-            color: #999999;
-            line-height: 2;
-            text-decoration: none;
-            display: block;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #ff6b35;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: #2d2d2d;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #2d2d2d;
-            color: #999999;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            right: 2rem;
-            bottom: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #25d366;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 1.8rem;
-            text-decoration: none;
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
-            z-index: 1100;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 18px 40px rgba(37, 211, 102, 0.5);
-        }
-
-        /* Responsive */
-        /* Mobile Menu Styles */
-        .mobile-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            z-index: 2000;
-        }
-
-        .mobile-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background: var(--text-main);
-            border-radius: 2px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 968px) {
-            .service-detail-card {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                margin-bottom: 6rem;
-            }
-
-            .service-detail-card:nth-child(even) {
-                direction: ltr;
-            }
-
-            .service-image {
-                height: 300px;
-                font-size: 6rem;
-            }
-
-            .service-text h2 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                width: 100% !important;
-                transform: none !important;
-                border-radius: 0 !important;
-                padding: 1rem 1.5rem !important;
-                background: var(--bg-light) !important;
-                border-bottom: 1px solid var(--glass-border) !important;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                background: var(--bg-light);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-                z-index: 1500;
-                padding: 2rem;
-            }
-
-            .nav-menu.active {
-                right: 0;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .nav-links li {
-                width: 100%;
-            }
-
-            .nav-links a {
-                font-size: 1.5rem;
-                display: block; 
-                padding: 0.5rem;
-            }
-
-            .dropdown:hover .dropdown-content {
-                display: none;
-            }
-
-            .dropdown.active .dropdown-content {
-                display: flex;
-                flex-direction: column;
-                position: static;
-                background: transparent;
-                box-shadow: none;
-                padding: 1rem 0;
-                transform: none;
-                opacity: 1;
-                visibility: visible;
-                border: none;
-            }
-
-            .dropdown-content a {
-                font-size: 1.1rem;
-                padding: 0.8rem;
-                justify-content: center;
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-
-            .mobile-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 6px);
-            }
-
-            .mobile-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .mobile-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -6px);
-            }
-
-            .cta-btn.desktop-only {
-                display: none;
-            }
-
-            .services-header {
-                padding: 12rem 5% 4rem;
-            }
-
-            .service-features {
-                grid-template-columns: 1fr;
-            }
-
-            .whatsapp-float {
-                right: 1.5rem;
-                bottom: 1.5rem;
-                width: 56px;
-                height: 56px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
     <!-- Background Animations -->
@@ -1510,37 +33,56 @@
             <ul class="nav-links">
                 <li><a href="introvminds_landing.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="services.html">Services ▾</a>
                     <div class="dropdown-content">
-                        <a href="seo-content.html">
+                        <a href="services.html#growth">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                            Growth Strategy
+                        </a>
+                        <a href="services.html#performance">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            Performance Marketing
+                        </a>
+                        <a href="services.html#seo">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            SEO & Content Marketing
+                            SEO
                         </a>
-                        <a href="social-media.html">
+                        <a href="services.html#social">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                            Social Media Management
+                            Social Media
                         </a>
-                        <a href="ppc-ads.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                            PPC & Paid Ads
-                        </a>
-                        <a href="email-marketing.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            Email Marketing
-                        </a>
-                        <a href="web-design.html">
+                        <a href="services.html#web">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                            Web Design & Dev
+                            Web Development
+                        </a>
+                        <a href="services.html#creative">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.5 1.5"></path><path d="M7 11l5-5"></path></svg>
+                            Creative Production
+                        </a>
+                        <a href="services.html#3d">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            3D Animation
                         </a>
                     </div>
                 </li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <div class="mobile-menu-footer">
+                <p>Ready to scale your business?</p>
+                <a href="tel:+919876543210" class="mobile-contact-link">📞 +91 98765 43210</a>
+                <div class="mobile-socials">
+                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="LinkedIn">LI</a>
+                </div>
+            </div>
         </div>
         <div class="nav-right">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <span id="themeIcon">☀️</span>
+                <span id="themeIcon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </span>
             </button>
             <a href="contact.html" class="cta-btn desktop-only">Get Started</a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -1551,258 +93,264 @@
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <header class="services-header">
-        <span class="subtitle">Our Expertise</span>
-        <h1>Digital Marketing Solutions</h1>
-        <p>Explore our comprehensive suite of data-driven digital marketing services designed to scale your business, increase brand visibility, and drive measurable results.</p>
-        <div class="header-buttons">
-            <a href="contact.html" class="primary-btn">
-                Get Free Consultation
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <a href="#services" class="secondary-btn">View All Services</a>
+    <!-- Simplified Services Hero -->
+    <section class="services-hero-simple">
+        <div class="hero-simple-content">
+            <div class="hero-tag">Our Expertise</div>
+            <h1>Comprehensive Digital Solutions</h1>
+            <p>From strategy to execution, we provide the full spectrum of digital services to help your brand scale and dominate the market.</p>
+            <div class="hero-cta">
+                <a href="contact.html" class="primary-btn">Book a Strategy Call</a>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Trust Indicators Section -->
-    <section class="trust-indicators">
-        <div class="trust-container">
-            <div class="trust-stats">
-                <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Clients Served</div>
+    <!-- Detailed Services Sections -->
+    <section class="detailed-services">
+        <!-- 1. Growth Strategy -->
+        <div class="service-detail-section" id="growth">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">01</div>
+                    <h2>Growth Strategy & Marketing Consulting</h2>
+                    <p class="service-description">We build the foundation before execution. Our consulting services ensure your business is positioned for maximum growth.</p>
+                    <ul class="service-list">
+                        <li>Market & competitor research</li>
+                        <li>Business and marketing strategy</li>
+                        <li>Brand positioning & messaging</li>
+                        <li>Go-to-market planning</li>
+                        <li>Customer journey & funnel design</li>
+                        <li>Audience & persona development</li>
+                        <li>Growth roadmap planning</li>
+                        <li>Market entry & expansion consulting</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Get Started with Strategy <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">250%</div>
-                    <div class="stat-label">Avg. ROI Increase</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Client Satisfaction</div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M212 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
                 </div>
             </div>
-            <div class="trust-badges">
-                <div class="badge-item">
-                    <div class="badge-icon">🏆</div>
-                    <div class="badge-text">Best Digital Agency 2025</div>
+        </div>
+
+        <!-- 2. Performance Marketing -->
+        <div class="service-detail-section alt-bg" id="performance">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">02</div>
+                    <h2>Performance Marketing & Advertising</h2>
+                    <p class="service-description">Data-driven campaigns designed to generate revenue. We optimize every dollar spent to maximize your ROI.</p>
+                    <ul class="service-list">
+                        <li>Search Engine Marketing (Google Ads, YouTube Ads)</li>
+                        <li>Meta Ads (Facebook & Instagram)</li>
+                        <li>TikTok & LinkedIn advertising</li>
+                        <li>Conversion-focused ad funnels</li>
+                        <li>Retargeting & remarketing campaigns</li>
+                        <li>Campaign optimization & A/B testing</li>
+                        <li>Performance tracking & reporting</li>
+                        <li>ROI optimization & scaling</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Scale Your Ads <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
                 </div>
-                <div class="badge-item">
-                    <div class="badge-icon">✨</div>
-                    <div class="badge-text">Google Partner</div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
                 </div>
-                <div class="badge-item">
-                    <div class="badge-icon">💼</div>
-                    <div class="badge-text">ISO Certified</div>
+            </div>
+        </div>
+
+        <!-- 3. SEO -->
+        <div class="service-detail-section" id="seo">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">03</div>
+                    <h2>Search Engine Optimization (SEO)</h2>
+                    <p class="service-description">Visibility that compounds over time. We help you dominate search results and drive organic growth.</p>
+                    <ul class="service-list">
+                        <li>Technical SEO audits</li>
+                        <li>On-page SEO optimization</li>
+                        <li>Keyword research & content mapping</li>
+                        <li>Local SEO & Google Business optimization</li>
+                        <li>E-commerce SEO</li>
+                        <li>SEO content strategy</li>
+                        <li>Link building & authority development</li>
+                        <li>Performance monitoring</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Boost Your Rankings <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
                 </div>
-                <div class="badge-item">
-                    <div class="badge-icon">📱</div>
-                    <div class="badge-text">Meta Verified Partner</div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Social Media -->
+        <div class="service-detail-section alt-bg" id="social">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">04</div>
+                    <h2>Social Media & Content Marketing</h2>
+                    <p class="service-description">Consistent presence that builds trust. We create content that resonates and engages your audience across platforms.</p>
+                    <ul class="service-list">
+                        <li>Social media strategy & planning</li>
+                        <li>Instagram, LinkedIn, TikTok & YouTube management</li>
+                        <li>Content calendars & publishing</li>
+                        <li>Creative content production</li>
+                        <li>Short-form video strategy</li>
+                        <li>Community management</li>
+                        <li>Influencer collaborations</li>
+                        <li>Content repurposing systems</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Grow Your Community <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Web Development -->
+        <div class="service-detail-section" id="web">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">05</div>
+                    <h2>Web Development & Digital Platforms</h2>
+                    <p class="service-description">Digital infrastructure built for growth. High-performance websites designed for conversion and speed.</p>
+                    <ul class="service-list">
+                        <li>WordPress website development</li>
+                        <li>Custom website development</li>
+                        <li>Landing page design & optimization</li>
+                        <li>E-commerce website development</li>
+                        <li>UX/UI architecture</li>
+                        <li>Website speed & performance optimization</li>
+                        <li>SEO-ready website builds</li>
+                        <li>Maintenance & support</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Build Your Website <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Creative Production -->
+        <div class="service-detail-section alt-bg" id="creative">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">06</div>
+                    <h2>Brand, Creative & Media Production</h2>
+                    <p class="service-description">How your brand looks, feels, and communicates. We bring your vision to life with high-end creative production.</p>
+                    <ul class="service-list">
+                        <li>Brand identity development</li>
+                        <li>Creative direction</li>
+                        <li>Copywriting & brand voice</li>
+                        <li>Campaign creatives</li>
+                        <li>Video production (ads, brand, explainer)</li>
+                        <li>Scriptwriting & storyboarding</li>
+                        <li>Founder/leadership video content</li>
+                        <li>AI-assisted media production</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Elevate Your Brand <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 3D Animation -->
+        <div class="service-detail-section" id="3d">
+            <div class="service-detail-container">
+                <div class="service-detail-info">
+                    <div class="service-number">07</div>
+                    <h2>3D Animation & Modeling</h2>
+                    <p class="service-description">High-impact visual storytelling for modern brands. Cutting-edge 3D visuals that set you apart.</p>
+                    <ul class="service-list">
+                        <li>3D product modeling</li>
+                        <li>Product visualization</li>
+                        <li>3D animation for ads & campaigns</li>
+                        <li>Motion graphics & CGI videos</li>
+                        <li>Architectural & environment renders</li>
+                        <li>3D explainer videos</li>
+                        <li>Interactive 3D assets</li>
+                        <li>Game-ready 3D assets</li>
+                    </ul>
+                    <div class="service-cta">
+                        <a href="contact.html" class="service-cta-link">Start Your 3D Project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+                <div class="service-detail-visual">
+                    <div class="visual-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Detail Section -->
-    <section class="services-detail" id="services">
-        <div class="service-detail-card">
-            <div class="service-image">🎯</div>
-            <div class="service-text">
-                <h2>SEO & Content</h2>
-                <p>Dominate search rankings with strategic SEO and compelling content that converts visitors into loyal customers. We focus on both technical optimization and high-value content creation.</p>
-                <ul class="service-features">
-                    <li>Keyword Research</li>
-                    <li>On-Page SEO</li>
-                    <li>Link Building</li>
-                    <li>Content Strategy</li>
-                </ul>
-                <a href="seo-content.html" class="learn-more-btn">
-                    Explore SEO Services
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="service-detail-card">
-            <div class="service-image">📱</div>
-            <div class="service-text">
-                <h2>Social Media Marketing</h2>
-                <p>Build engaged communities and amplify your brand voice across all major social platforms with data-driven campaigns. We create scroll-stopping content that drives real engagement.</p>
-                <ul class="service-features">
-                    <li>Community Management</li>
-                    <li>Paid Social Ads</li>
-                    <li>Influencer Marketing</li>
-                    <li>Content Creation</li>
-                </ul>
-                <a href="social-media.html" class="learn-more-btn">
-                    Explore Social Services
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="service-detail-card">
-            <div class="service-image">💰</div>
-            <div class="service-text">
-                <h2>PPC Advertising</h2>
-                <p>Maximize ROI with precision-targeted paid campaigns that deliver qualified leads and measurable results. We manage your budget effectively to ensure every click counts.</p>
-                <ul class="service-features">
-                    <li>Google Ads</li>
-                    <li>Remarketing</li>
-                    <li>Display Ads</li>
-                    <li>A/B Testing</li>
-                </ul>
-                <a href="ppc-ads.html" class="learn-more-btn">
-                    Explore PPC Services
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="service-detail-card">
-            <div class="service-image">📧</div>
-            <div class="service-text">
-                <h2>Email Marketing</h2>
-                <p>Nurture relationships and drive conversions with personalized email campaigns that resonate with your audience. We build automation sequences that work while you sleep.</p>
-                <ul class="service-features">
-                    <li>Automation</li>
-                    <li>Newsletter Design</li>
-                    <li>Segmentation</li>
-                    <li>Lead Nurturing</li>
-                </ul>
-                <a href="email-marketing.html" class="learn-more-btn">
-                    Explore Email Services
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Digital Future?</h2>
+            <p>Join 500+ ambitious brands who have scaled their business with our data-driven strategies and creative excellence.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="primary-btn">Get Started Now</a>
+                <a href="introvminds_landing.html#testimonials" class="secondary-btn">View Case Studies</a>
             </div>
         </div>
     </section>
 
-    <!-- Process Overview Section -->
-    <section class="process-overview">
-        <div class="process-container">
-            <div class="process-header">
-                <span class="subtitle">Our Workflow</span>
-                <h2>How We Deliver Results</h2>
-                <p>Our proven process ensures we deliver exceptional results for every client, from initial consultation to ongoing optimization.</p>
-            </div>
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h3>Discovery & Strategy</h3>
-                    <p>We start with a deep dive into your business, goals, and target audience to create a customized digital marketing strategy tailored to your needs.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3>Implementation</h3>
-                    <p>Our team executes the strategy with precision, whether it's SEO optimization, content creation, social media campaigns, or PPC advertising.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3>Monitoring & Optimization</h3>
-                    <p>We continuously monitor performance metrics and optimize campaigns to ensure maximum ROI and consistent improvement over time.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h3>Reporting & Growth</h3>
-                    <p>We provide detailed reports and insights, keeping you informed while we scale your digital presence and drive sustainable business growth.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="testimonials-container">
-            <div class="testimonials-header">
-                <span class="subtitle">Client Success Stories</span>
-                <h2>What Our Clients Say</h2>
-                <p>Hear from businesses that have transformed their digital presence with our expert services.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                    <div class="testimonial-text">
-                        "Introvminds completely revolutionized our digital marketing strategy. Within 6 months, we saw a 250% increase in organic traffic and a 180% boost in lead generation. Their team is professional, responsive, and truly understands our business needs."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👨💼</div>
-                        <div class="author-info">
-                            <h4>Rahul Sharma</h4>
-                            <p>CEO, TechNova Solutions</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                    <div class="testimonial-text">
-                        "The SEO and content marketing services provided by Introvminds helped us dominate our industry keywords. We now rank #1 for all our primary keywords and have seen a significant increase in qualified leads. Highly recommended!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👩💼</div>
-                        <div class="author-info">
-                            <h4>Priya Mehta</h4>
-                            <p>Marketing Director, GlobalRetail</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                    <div class="testimonial-text">
-                        "Working with Introvminds has been a game-changer for our business. Their social media strategies helped us build a strong online community and increase brand awareness by 300%. The results speak for themselves!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">👨💻</div>
-                        <div class="author-info">
-                            <h4>Vikram Patel</h4>
-                            <p>Founder, StartupX</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer CTA Section -->
-    <section class="footer-cta">
-        <div class="footer-cta-container">
-            <h2>Ready to Transform Your Digital Presence?</h2>
-            <p>Join hundreds of businesses that have scaled their growth with our expert digital marketing services. Get started today for a free consultation.</p>
-            <div class="footer-cta-buttons">
-                <a href="contact.html" class="primary-btn">
-                    Get Free Consultation
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <a href="contact.html" class="secondary-btn">
-                    Contact Us
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3 class="logo">Introvminds</h3>
-                <p>Transforming brands through innovative digital marketing strategies.</p>
+                <div class="logo">
+                    <img src="logo.png" alt="Introvminds Logo">
+                </div>
+                <p>We combine data-driven strategies with creative excellence to help ambitious brands dominate the digital landscape and achieve measurable growth.</p>
                 <div class="social-links">
-                    <a href="#">𝕏</a>
-                    <a href="#">in</a>
-                    <a href="#">f</a>
-                    <a href="#">ig</a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
                 </div>
             </div>
             <div class="footer-section">
                 <h3>Services</h3>
-                <a href="seo-content.html">SEO & Content</a>
-                <a href="social-media.html">Social Media</a>
-                <a href="ppc-ads.html">PPC Advertising</a>
-                <a href="email-marketing.html">Email Marketing</a>
+                <a href="services.html#seo">SEO & Content</a>
+                <a href="services.html#social">Social Media</a>
+                <a href="services.html#performance">PPC Advertising</a>
+                <a href="services.html#web">Web Development</a>
             </div>
             <div class="footer-section">
                 <h3>Company</h3>
@@ -1818,7 +366,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Introvminds. All rights reserved.</p>
+            <p>&copy; 2026 Introvminds. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1830,14 +378,37 @@
         rel="noopener"
     >💬</a>
 
+    <!-- Search Modal -->
+    <div class="modal-overlay" id="callbackModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h2>Get Your Custom Solution</h2>
+            <p>Enter your details below and we'll call you back with a tailored strategy.</p>
+            <form class="callback-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="Your Phone Number">
+                </div>
+                <div class="form-group">
+                    <label for="comment">Industry / Comment</label>
+                    <textarea id="comment" required placeholder="Tell us about your industry or challenge..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Get a Call Back</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Custom Cursor - No Delay
+        // Custom Cursor
         const cursor = document.querySelector('.custom-cursor');
         const cursorDot = document.querySelector('.cursor-dot');
         const blobs = document.querySelectorAll('.blob');
 
         document.addEventListener('mousemove', (e) => {
-            // Direct positioning - no lag
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
             cursorDot.style.left = e.clientX + 'px';
@@ -1855,21 +426,6 @@
             });
         });
 
-        // Hover effect on interactive elements
-        const hoverElements = document.querySelectorAll('a, button, .service-detail-card');
-        
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.classList.add('hover');
-                cursorDot.classList.add('hover');
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('hover');
-                cursorDot.classList.remove('hover');
-            });
-        });
-
         // Click effect
         document.addEventListener('mousedown', () => {
             cursor.classList.add('click');
@@ -1879,29 +435,43 @@
             cursor.classList.remove('click');
         });
 
+        // Hover effect
+        const hoverElements = document.querySelectorAll('a, button, .visual-card, .service-detail-section');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorDot.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorDot.classList.remove('hover');
+            });
+        });
+
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         const body = document.body;
 
-        // Check for saved theme preference or default to dark mode
+        const sunIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
         const currentTheme = localStorage.getItem('theme') || 'dark';
         if (currentTheme === 'light') {
             body.classList.remove('dark-mode');
-            themeIcon.textContent = '🌙';
+            themeIcon.innerHTML = moonIcon;
         } else {
             body.classList.add('dark-mode');
-            themeIcon.textContent = '☀️';
+            themeIcon.innerHTML = sunIcon;
         }
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-            
             if (body.classList.contains('dark-mode')) {
-                themeIcon.textContent = '☀️';
+                themeIcon.innerHTML = sunIcon;
                 localStorage.setItem('theme', 'dark');
             } else {
-                themeIcon.textContent = '🌙';
+                themeIcon.innerHTML = moonIcon;
                 localStorage.setItem('theme', 'light');
             }
         });
@@ -1934,7 +504,7 @@
                 dropdown.addEventListener('click', (e) => {
                     if (window.innerWidth <= 768) {
                         e.stopPropagation();
-                        dropdown.classList.toggle('active');
+                        dropdown.classList.toggle('open');
                     }
                 });
             }
@@ -1949,7 +519,39 @@
             });
         }
 
-        // Scroll animation for elements
+        // Search Modal Logic (Now used for CTA)
+        const callbackModal = document.getElementById('callbackModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        function openModal() {
+            callbackModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeM() {
+            callbackModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (closeModal) {
+            closeModal.addEventListener('click', closeM);
+        }
+
+        callbackModal.addEventListener('click', (e) => {
+            if (e.target === callbackModal) closeM();
+        });
+
+        // Update CTA buttons to open modal
+        document.querySelectorAll('.primary-btn, .cta-btn').forEach(btn => {
+            if (!btn.href || btn.href.includes('contact.html')) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                });
+            }
+        });
+
+        // Intersection Observer for Reveal Animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1958,49 +560,15 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('reveal');
                 }
             });
         }, observerOptions);
 
-        // Observe all elements that need animation
-        document.querySelectorAll('.service-detail-card, .testimonial-card, .process-step, .stat-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add hover effects to navbar links
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
-            });
-            link.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
+        document.querySelectorAll('.service-detail-section').forEach(section => {
+            section.classList.add('reveal-init');
+            observer.observe(section);
         });
     </script>
-
-    <!-- Sticky CTA Button -->
-    <div class="sticky-cta">
-        <a href="contact.html" class="sticky-cta-button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            Get Started Now
-        </a>
-    </div>
-
 </body>
 </html>
