@@ -1991,11 +1991,10 @@
             }
 
             .hero {
-                padding: 8rem 0 4rem;
+                padding: 9rem 0 4rem;
                 min-height: auto;
                 width: 100%;
                 max-width: 100%;
-                overflow: hidden;
                 box-sizing: border-box;
             }
 
@@ -2012,14 +2011,12 @@
                 padding: 0 1.25rem;
                 margin: 0;
                 box-sizing: border-box;
-                overflow: hidden;
             }
 
             .hero-left {
                 width: 100%;
                 max-width: 100%;
                 padding: 0;
-                overflow: hidden;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -2098,20 +2095,20 @@
             }
 
             .hero-right {
-                height: 320px;
-                margin-top: 2rem;
+                height: 450px;
+                margin-top: 3rem;
                 width: 100%;
                 position: relative;
-                overflow: hidden;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
 
             .industries-showcase {
-                height: 280px;
+                height: 400px;
                 width: 100%;
                 position: relative;
+                perspective: 1000px;
             }
 
             .industry-indicators {
