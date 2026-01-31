@@ -34,8 +34,11 @@
                 <li><a href="introvminds_landing.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li class="dropdown active">
-                    <a href="services.html">Services ▾</a>
+                    <a href="services.html">Services <span class="nav-arrow">▾</span></a>
                     <div class="dropdown-content">
+                        <a href="services.html" class="mobile-only-link">
+                            All-in-One
+                        </a>
                         <a href="services.html#growth">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                             Growth Strategy
@@ -499,15 +502,7 @@
                 });
             });
 
-            // Mobile Dropdown Toggle
-            if (dropdown) {
-                dropdown.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768) {
-                        e.stopPropagation();
-                        dropdown.classList.toggle('open');
-                    }
-                });
-            }
+            // Mobile Dropdown Toggle removed - always expanded by default
 
             // Close menu when clicking outside
             document.addEventListener('click', (e) => {
